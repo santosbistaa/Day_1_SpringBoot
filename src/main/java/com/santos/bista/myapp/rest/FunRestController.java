@@ -1,5 +1,6 @@
 package com.santos.bista.myapp.rest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +25,19 @@ public class FunRestController {
     public String getDailyFortune(){
         return "Today is your Lucky Day!";
     }
+
+    //injecting our custom properties coach.name and team.name
+    @Value("${coach.name}")
+    private String coachName;
+
+    @Value("${team.name}")
+    private String teamName;
+
+    //expose new endpoints for "teaminfo"
+    @GetMapping("/teaminfo")
+    public String getTeamInfo(){
+        return "Coach: " +coachName + " , Team name: " +teamName;
+    }
+
 
 }
